@@ -1,0 +1,23 @@
+; Reverse String
+
+ExitProcess proto
+
+.data
+source BYTE "This is the source string",0
+target BYTE SIZEOF source DUP('#')
+
+.code
+main proc
+mov esi, 0
+mov ecx, SIZEOF source	
+mov edx, SIZEOF source
+MYLOOP:
+	mov al, [source + edx - 1]
+	mov [target + esi], al
+	inc esi
+	dec edx
+
+	loop MYLOOP
+	call ExitProcess
+main endp
+end
