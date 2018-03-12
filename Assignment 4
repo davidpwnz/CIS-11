@@ -2,6 +2,29 @@
 - [ ] 4.3.8 Section Review, Questions 1,2,3,4,5
 - [ ] 4.4.5 Section Review, Questions 4,5
 - [ ] 4.10 Programming Exercises, Question 7
+; Reverse String
+
+ExitProcess proto
+
+.data
+source BYTE "This is the source string",0
+target BYTE SIZEOF source DUP('#')
+
+.code
+main proc
+mov esi, 0
+mov ecx, SIZEOF source	
+mov edx, SIZEOF source
+MYLOOP:
+	mov al, [source + edx - 1]
+	mov [target + esi], al
+	inc esi
+	dec edx
+
+	loop MYLOOP
+	call ExitProcess
+main endp
+end
 
 
 - [ ] Upload your assignment to GitHub
