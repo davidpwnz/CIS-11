@@ -1,38 +1,58 @@
 - [ ] 1.1.3 Section Review, Questions 1,3, 8, 12
 1. How do assemblers and linkers work together?
-
+  Definitions of assemblers and linkers
+  
 3. What is meant by a one-to-many relationship when comparing a high-level language to
 machine language?
+  In a one-to-many relationship, a single statement expands into multiple assembly language or machine instructions.
 
 8. Do you suppose type checking on pointer variables is stronger (stricter) in assembly language,
 or in C and C++?
+  C++ does not allow a pointer of one type to be assigned to a pointer of another type. Assembly language has no such restriction 
+  regarding pointers.
 
 12. Challenge: Translate the following C++ expression to assembly language, using the example
-presented earlier in this chapter as a guide: X  (Y * 4)  3.
+presented earlier in this chapter as a guide: X = (Y * 4)  3.
+  mov eax, Y
+  mov ebx, 4
+  imul, ebx
+  add eax, 3
+  mov X, eax
 
 - [ ] 1.2.1 Section Review, Questions 2, 3, 10
 2. Why do you suppose translated programs often execute more quickly than interpreted ones?
+  A translated program is often faster because it is coded in a language that can be directly executed on the target machine. 
+  This is not the case with interpreted programs, since they must be translated while they are running.
 
 3. (True/False): When an interpreted program written in language L1 runs, each of its instructions
 is decoded and executed by a program written in language L0.
+  True
 
 10. Statements at the assembly language level of a virtual machine are translated into statements
 at which other level?
+  Level 2 (Instruction Set Architecture).
 
 - [ ] 1.3.9 Section Review, Questions 2, 3, 5, 6, 7 
 2. What is the decimal representation of each of the following unsigned binary integers?
 a. 11111000
+  248
 b. 11001010
+  202
 c. 11110000
+  240
 
 3. What is the sum of each pair of binary integers?
 a. 00001111  00000010
+  17
 b. 11010101  01101011
+  320
 c. 00001111  00001111
+  30
 
-5. What is the minimum number of binary bits needed to represent each of the following
+***5. What is the minimum number of binary bits needed to represent each of the following
 unsigned decimal integers?
 a. 65
+  8
 b. 409
 c. 16385
 
