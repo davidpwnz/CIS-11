@@ -1,0 +1,103 @@
+- [ ] 5.9 Programming Exercises, Questions 10
+;10. Fibonacci Generator
+;Write a procedure that produces N values in the Fibonacci number series and stores them in an
+;array of doubleword. Input parameters should be a pointer to an array of doubleword, a
+;counter of the number of values to generate. Write a test program that calls your procedure,
+;passing N = 47. The first value in the array will be 1, and the last value will be 2,971,215,073.
+;Use the Visual Studio debugger to open and inspect the array contents.
+  WriteInt64 PROTO
+  WriteString PROTO
+  ReadInt64 PROTO
+  Crlf PROTO 
+  extrn ExitProcess: PROC
+
+  .data
+  pressEnter BYTE "Press Enter to Continue",0
+  .code
+  main proc
+  	mov rax,0
+  	mov rsi,0
+  	mov rdi,1
+	  mov ecx, 47
+  L1:
+	  call writeToScreen
+	  loop l1
+	  call pressEnterToContinue
+
+     call ExitProcess
+
+  main endp
+
+  writeToScreen proc
+  	mov rax, 0
+	  add rax, rsi
+	  add rax, rdi
+  	mov rsi, rdi
+	  mov rdi, rax
+
+	  call WriteInt64
+
+	  ret
+  writeToScreen endp
+
+  pressEnterToContinue proc
+  	call Crlf
+	  mov rdx, OFFSET pressEnter
+	  call WriteString
+	  call ReadInt64
+  	ret
+  pressEnterToContinue endp
+
+  end
+
+
+- [ ] 5.9 Programming Exercises, Question 7 (You will need to do this in 32 bit) OR Write a program that uses the Random64 
+function from the Irvine64 library
+;7. Random Screen Locations
+;Write a program that displays a single character at 100 random screen locations, using a timing
+;delay of 100 milliseconds. Hint: Use the GetMaxXY procedure to determine the current size of
+;the console window
+  WriteInt64 PROTO
+  WriteString PROTO
+  Randomize PROTO
+  Random64 PROTO
+  ReadInt64 PROTO
+  Crlf PROTO 
+  extrn ExitProcess: PROC
+
+  .data
+  pressEnter BYTE "Press Enter to Continue",0
+  ;myString BYTE "This is my string",0
+  .code
+  main proc
+  	call Randomize
+	  mov ecx, 100
+  L1:
+  	call writeToScreen
+	  loop l1
+	  call pressEnterToContinue
+
+    call ExitProcess
+
+  main endp
+
+  writeToScreen proc
+  	call Random64
+  	call writeInt64
+	  ret
+  writeToScreen endp
+
+  pressEnterToContinue proc
+	  call Crlf
+	  mov rdx, OFFSET pressEnter
+	  call WriteString
+	  call ReadInt64
+	  ret
+  pressEnterToContinue endp
+
+  end
+
+- [ ] Upload your assignment to GitHub
+- [ ] Email james.wilson@rccd.edu with the url to the source code on GitHub	
+
+***  20 points (10 points for each question) ***
