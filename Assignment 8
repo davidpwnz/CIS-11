@@ -3,6 +3,93 @@
 - [ ] Convert this variable to decimal: DWORD  0000 0000 0000 0000 0000 0000 1111 1110
 - [ ] Convert this variable to decimal: SDWORD 0000 0000 0000 0000 0000 0000 1111 1110
 - [ ] Submit this assignment by 4/3/2018 for extra credit	
+  INCLUDE Irvine32.inc
+
+  .DATA
+  		binaryNumber1        DWORD  1111 1111 1111 1111 1111 1111 1111 1110
+  		;binaryNumber2        SDWORD 1111 1111 1111 1111 1111 1111 1111 1110
+  		;binaryNumber3        DWORD  0000 0000 0000 0000 0000 0000 1111 1110
+  		;binaryNumber4        SDWORD 0000 0000 0000 0000 0000 0000 1111 1110
+  		NumberLength DWORD 0
+	  	base                DWORD 2
+		  DecimalNumber       DWORD ?
+  
+  		OuterLoopCount     DWORD 0
+  		msgBinary           BYTE " Binary: ",0
+  		msgDecimalNumber    BYTE " Decimal: ",0 
+
+		  msgNotBinary        BYTE " Not Binary",0
+  		msgBinaryToDecimal  BYTE " Calculate conversion",0
+
+  .CODE
+  	main PROC
+
+	  	mov edx, OFFSET msgBinaryToDecimal
+	  	call WriteString
+	  	call Crlf                            
+
+		  mov edx, OFFSET msgBinary
+  		call WriteString
+  
+  		mov edx,OFFSET binaryNumber1
+  		mov ecx,SIZEOF binaryNumber1
+  		call ReadString
+  		mov NumberLength,eax  
+
+  		mov eax,0
+  		mov esi,0
+  		mov ecx, NumberLength
+  	whilePart:
+  		cmp ecx,0
+  		je displayNumbers
+  		mov OuterLoopCount,ecx         
+
+  		ifPart:
+  			cmp binaryNumber1[esi],'0'
+  			je inc
+
+  			mov ecx, NumberLength
+  			sub ecx,esi
+  			dec ecx
+
+	  		mov eax,1
+	  		whilePart2:
+	  			cmp ecx,0
+	  			je stop
+
+	  			mov ebx,base
+		  		mul ebx
+		  		dec ecx
+		  	jmp whilePart2
+
+			  stop:
+			  	add DecimalNumber,eax
+			  jmp inc
+
+	  IncEsi:
+		  inc esi
+		  mov ecx,OuterLoopCount 
+  		dec ecx
+	  	jmp WhilePart
+
+  	displayNumbers:
+  		mov edx, OFFSET msgDecimalNumber
+  		call WriteString  
+
+  		mov edx, 0
+  		mov eax, DecimalNumber
+  		call WriteDec              
+
+	  	call Crlf                            
+
+		  mov edx, 0
+		  mov eax, DecimalNumber
+
+	  call Crlf
+	  call WaitMsg    
+	  exit            
+  	main ENDP  
+	  END main    
 
 
 - [ ] Upload your assignment to GitHub
