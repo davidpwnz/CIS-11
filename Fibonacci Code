@@ -1,0 +1,45 @@
+; Fib sequence
+; n = (n-1) + (n-2)
+
+ExitProcess proto
+WriteInt64 proto
+Crlf proto
+
+.data
+nMinus2 QWORD 0
+nMinus1 QWORD 1
+n		QWORD ?
+
+
+
+.code
+main proc
+	mov rcx,47
+
+	mov rax, nMinus2
+	Call WriteInt64
+	Call Crlf
+	mov rax, nMinus1
+	Call WriteInt64
+	Call Crlf
+	
+	STARTLOOP:
+		mov r9, nMinus2
+		add r9, nMinus1
+		mov n, r9
+		mov rax, n
+		Call WriteInt64
+		Call Crlf
+
+		mov r9, nMinus1
+		mov nMinus2, r9
+
+		mov r9, n
+		mov nMinus1, r9
+	LOOP STARTLOOP
+
+
+   
+   call ExitProcess
+main endp
+end
