@@ -1,0 +1,35 @@
+- Chapter 4, Section 4.10 Programming Exercises: Question 2.
+  Write a program with a loop and indexed addressing that exchanges every pair of values in an array 
+  with an even number of elements.  Therefore, item i will exchange with item i+1, and item i+2 will 
+  exchange with item i+3, and so on
+  
+  .386
+  .model flat,stdcall
+  .stack 4096
+  ExitProcess proto,dwExitCode:dword
+  .data
+  array dword 1,2,3,4,5,6,7,8
+  .code
+  main proc
+    mov esi, OFFSET array
+    mov ecx, LENGTHOF array -1
+  
+  myLoop:
+
+    MOV eax,[esi]
+    XCHG eax,[esi+4]
+    MOV [esi],eax
+
+    add esi, TYPE array
+    add esi, TYPE array
+
+  loop myLoop
+
+    invoke ExitProcess,0
+  main endp
+  end main
+
+Upload your assignment to GitHub
+Email james.wilson@rccd.edu with the url to the source code on GitHub
+
+*** 22 points ***
