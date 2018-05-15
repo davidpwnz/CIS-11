@@ -1,0 +1,51 @@
+-Chapter 4, Section 4.10 Programming Exercises: Question 8.
+ Using a loop and indexed addressing, write code that rotates the members of a 32-bit integer array 
+ forward one position.  The value at the end of the array must wrap around to the first position.  
+ For example, the array [10,20,30,40] would be transformed into [40,10,20,30]
+ 
+ .386
+ .model flat,stdcall
+ .stack 4096
+ ExitProcess PROTO, dwExitCode:DWORD
+
+ .data
+ array DWORD 10,20,30,40
+ arrayType DWORD TYPE array
+ newArray DWORD LENGTHOF array DUP(?)
+ lastElement DWORD ?
+
+ .code
+ main PROC
+   
+    ;Get first element address in ESI
+    MOV ESI, OFFSET array
+
+    ;Get address of next element in EDI
+    MOV EDI, OFFSET newArray
+    ADD EDI, TYPE newArray
+
+    ;set loop count into ecx
+    mov ECX, LENGTHOF array
+
+ L2:
+    MOV EAX, [ESI]
+    MOV [EDI], EAX
+
+    ADD ESI, TYPE array
+    ADD EDI, TYPE array
+
+    LOOP L2
+
+    ;set last element from array in newArray first position
+    MOV EDI,OFFSET newArray
+    MOV EAX, [ESI]
+    MOV [EDI], EAX
+
+ INVOKE ExitProcess,0
+ main ENDP
+ END main
+ 
+Upload your assignment to GitHub
+Email james.wilson@rccd.edu with the url to the source code on GitHub
+
+*** 25 points ***
