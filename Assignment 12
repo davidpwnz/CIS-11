@@ -38,7 +38,8 @@
 
     ;set last element from array in newArray first position
     MOV EDI,OFFSET newArray
-    MOV EAX, [ESI]
+    ;Moved the wrong value...
+    ;MOV EAX, [ESI]
     MOV [EDI], EAX
 
  INVOKE ExitProcess,0
