@@ -4,6 +4,69 @@
  If you are unable to attend the lecture where the algorithm is presented, 
  you can find it here: https://www.geeksforgeeks.org/bubble-sort/
 
+Include Irvine32.inc
+.386
+.model flat,stdcall
+.stack 4096
+ExitProcess proto,dwExitCode:dword
+
+.data
+array DWORD 10,5,25,15,20
+count DWORD ?
+index DWORD 1
+
+.code
+main proc
+	mov ebx, OFFSET array
+	mov ecx, LENGTHOF array
+
+L1:
+	mov eax,[ebx]
+	call WriteInt
+	add ebx, TYPE array
+
+	loop L1
+
+	mov ecx, LENGTHOF array
+	mov esi, 0
+	dec ecx
+
+L2:
+	mov count, ecx
+	mov ecx,LENGTHOF array 
+	sub ecx,index
+	sub ecx,1
+
+L3:
+	mov eax,array[esi * TYPE array]
+	cmp eax,array[esi * TYPE array + TYPE array]
+
+	jle L4
+
+	xchg eax,array[esi * TYPE array + type array]
+	mov array[esi * TYPE array],eax
+
+L4:
+	loop L3
+
+	inc esi
+	mov index,esi
+	mov ecx,count
+
+	loop L2
+
+	mov esi, OFFSET array
+	mov ecx, LENGTHOF array
+L5:
+	mov eax, [esi]
+	call WriteInt
+	add esi, TYPE array
+
+	loop L5
+
+	invoke ExitProcess,0
+main endp
+end main
 
 
 //It is important that you code this yourself or along with another student instead 
